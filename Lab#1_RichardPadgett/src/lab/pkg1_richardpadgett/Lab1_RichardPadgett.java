@@ -33,9 +33,10 @@ public class Lab1_RichardPadgett {
     }
 
     public static void turno(String[][] tablero) {
-        boolean turn = false;
+        boolean turn = true;
+        int contturno = 0;
         do {
-            if (turn == false) {
+            if (contturno % 2 == 0) {
                 System.out.println();
                 System.out.println("[[[[ENEMY PHASE]]]]]");
                 System.out.println("ingrese la pieza que desea mover");
@@ -85,9 +86,9 @@ public class Lab1_RichardPadgett {
                             }
                         }
                         tablero[x][y2] = "[+]";
-                        tablero[x][y] = "[ ] ";
+                        tablero[x][y] = "[ ]";
                         impat(tablero, 0, 0);
-                        manerasdeganarey(tablero);
+                        manerasdeganarey(tablero, turn);
                         break;
 
                     case 2:
@@ -120,12 +121,13 @@ public class Lab1_RichardPadgett {
                             }
                         }
                         tablero[x1][y] = "[+]";
-                        tablero[x][y] = "[ ] ";
+                        tablero[x][y] = "[ ]";
                         impat(tablero, 0, 0);
-                        manerasdeganarey(tablero);
+                        manerasdeganarey(tablero, turn);
 
                         break;
                 }
+
             } else {
                 System.out.println();
                 System.out.println("[[[[DEFENDER PHASE]]]]]");
@@ -158,12 +160,12 @@ public class Lab1_RichardPadgett {
 
                         }
                         if (tablero[x][y].equals("[$]")) {
-                            tablero[x][y] = "[ ] ";
+                            tablero[x][y] = "[ ]";
                             tablero[x][y2] = "[$]";
                         }
                         if (y2 > y) {
                             for (int i = y2; i <= y2; i++) {
-                                if (tablero[x][i].equals("[X]") || tablero[x][i].equals("+") || tablero[x][i].equals("[$]")) {
+                                if (tablero[x][i].equals("[X]") || tablero[x][i].equals("[+]") || tablero[x][i].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     y2 = sc.nextInt();
@@ -171,7 +173,7 @@ public class Lab1_RichardPadgett {
                             }
                         } else {
                             for (int i = y2; i >= y2; i--) {
-                                if (tablero[x][i].equals("[X]") || tablero[x][i].equals("+") || tablero[x][i].equals("[$]")) {
+                                if (tablero[x][i].equals("[X]") || tablero[x][i].equals("[+]") || tablero[x][i].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     y2 = sc.nextInt();
@@ -181,13 +183,14 @@ public class Lab1_RichardPadgett {
                         }
                         tablero[x][y2] = "[X]";
                         tablero[x][y] = "[ ]";
+                        Comer(tablero);
+                        manerasdeganarey(tablero, turn);
                         impat(tablero, 0, 0);
-                        manerasdeganarey(tablero);
 
                         break;
                     case 2:
                         System.out.println("Ingrese a que poscicion desea moverse");
-                        System.out.println("ingrese su coordenada en Y");
+                        System.out.println("ingrese su coordenada en X");
                         int x1 = sc.nextInt();
 
                         if (tablero[x1][y].equals("[+]") || tablero[x1][y].equals("[X]")) {
@@ -202,7 +205,7 @@ public class Lab1_RichardPadgett {
                         }
                         if (x1 > x) {
                             for (int i = x; i <= x1; i++) {
-                                if (tablero[i][y].equals("[X]") || tablero[i][y].equals("+") || tablero[i][y].equals("[$]")) {
+                                if (tablero[i][y].equals("[X]") || tablero[i][y].equals("[+]") || tablero[i][y].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en X");
                                     x1 = sc.nextInt();
@@ -210,7 +213,7 @@ public class Lab1_RichardPadgett {
                             }
                         } else {
                             for (int i = x; i >= x1; i--) {
-                                if (tablero[i][y].equals("[X]") || tablero[i][y].equals("+") || tablero[i][y].equals("[$]")) {
+                                if (tablero[i][y].equals("[X]") || tablero[i][y].equals("[+]") || tablero[i][y].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en X");
                                     x1 = sc.nextInt();
@@ -220,14 +223,16 @@ public class Lab1_RichardPadgett {
                         }
                         tablero[x1][y] = "[X]";
                         tablero[x][y] = "[ ]";
+                        Comer(tablero);
+                        manerasdeganarey(tablero, turn);
                         impat(tablero, 0, 0);
-                        manerasdeganarey(tablero);
 
                         break;
                 }
 
             }
-            turn = true;
+            contturno++;
+
         } while (turn);
 
     }
@@ -324,33 +329,37 @@ public class Lab1_RichardPadgett {
         return tablero;
     }
 
-    public static String[][] manerasdeganarey(String[][] tablero) {
+    public static boolean manerasdeganarey(String[][] tablero, boolean ganar) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 if (i == 0) {
                     if (tablero[i][j].equals("[$]")) {
                         System.out.println("Han ganado los defensores!");
+                        ganar = false;
                     }
                     break;
                 } else if (j == 0) {
                     if (tablero[i][j].equals("[$]")) {
                         System.out.println("Han ganado los defensores!");
+                        ganar = false;
                     }
                     break;
                 } else if (i == tablero.length) {
                     if (tablero[i][j].equals("[$]")) {
                         System.out.println("Han ganado los defensores!");
+                        ganar = false;
                     }
                     break;
                 } else if (j == tablero.length) {
                     if (tablero[i][j].equals("[$]")) {
                         System.out.println("Han ganado los defensores!");
+                        ganar = false;
                     }
                     break;
                 }
             }
         }
-        return tablero;
+        return ganar;
     }
 
     public static String[][] Comer(String[][] tablero) {
