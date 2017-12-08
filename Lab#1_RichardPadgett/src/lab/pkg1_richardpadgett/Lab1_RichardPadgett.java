@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Lab1_RichardPadgett {
 
     static Scanner sc = new Scanner(System.in);
+    static int contatacantes = 24;
+    static int ontdefense = 1;
 
     public static void main(String[] args) {
         System.out.println("[[[[[[[[[[[[TAWLBWRDD]]]]]]]]]]]]");
@@ -354,48 +356,90 @@ public class Lab1_RichardPadgett {
     public static String[][] Comer(String[][] tablero) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                ///Esquinas/////////
-                if ((i == 0 && j == 0) || (i == 10 && j == 0) || (i == 0 && j == 10) || (i == 10&& j ==10)) {
+
+                ////////////////BORDES//////////////////////
+                // borde izquierdo
+                if (i > 0 && i < 10) {
                     if (tablero[i][j].equals("+")) {
-                        ///Izquierda superior
-                        if ((tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$")) && (tablero[i + 1][j + 1].equals("X") || tablero[i + 1][j + 1].equals("$")) && (tablero[i][j + 1].equals("X") || tablero[i][j + 1].equals("$"))) {
+                        if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
                             tablero[i][j] = " ";
+                            contatacantes--;
                         }
-                        ///Izquierda inferior
-                        if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) && (tablero[i - 1][j + 1].equals("X") || tablero[i - 1][j + 1].equals("$")) && (tablero[i][j + 1].equals("X") || tablero[i][j + 1].equals("$"))) {
-                            tablero[i][j] = " ";
-                        }
-                        ///Derecha Superior
-                        if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) && (tablero[i - 1][j - 1].equals("X") || tablero[i - 1][j - 1].equals("$")) && (tablero[i][j - 1].equals("X") || tablero[i][j - 1].equals("$"))) {
-                            tablero[i][j] = " ";
-                        }
-                        ///Derecha inferior
-                        if ((tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$")) && (tablero[i + 1][j - 1].equals("X") || tablero[i + 1][j - 1].equals("$")) && (tablero[i][j - 1].equals("X") || tablero[i][j - 1].equals("$"))) {
-                            tablero[i][j] = " ";
-                        }
-                    } else if (tablero[i][j].equals("X") || tablero[i][j].equals("$")) {
-                        ///Izquierda superior
-                        if ((tablero[i + 1][j].equals("+")) && (tablero[i + 1][j + 1].equals("+")) && (tablero[i][j + 1].equals("+"))) {
-                            tablero[i][j] = " ";
-                        }
-                        ///Izquierda inferior
-                        if ((tablero[i - 1][j].equals("+")) && (tablero[i - 1][j + 1].equals("+")) && (tablero[i][j + 1].equals("+"))) {
-                            tablero[i][j] = " ";
-                        }
-                        ///Derecha Superior
-                        if ((tablero[i - 1][j].equals("+")) && (tablero[i - 1][j - 1].equals("+")) && (tablero[i][j - 1].equals("+"))) {
-                            tablero[i][j] = " ";
-                        }
-                        ///Derecha inferior
-                        if ((tablero[i + 1][j].equals("+")) && (tablero[i + 1][j - 1].equals("+")) && (tablero[i][j - 1].equals("+"))) {
+                    } else if (tablero[i][j].equals("X")) {
+                        if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
                             tablero[i][j] = " ";
                         }
                     }
+                }
+                ////borde superior
+                if (j > 0 && j < 10) {
+                    if (tablero[i][j].equals("+")) {
+                        if ((tablero[i][j - 1].equals("X") || tablero[i][j - 1].equals("$")) && (tablero[i][j + 1].equals("X") || tablero[i][j + 1].equals("$"))) {
+                            tablero[i][j] = " ";
+                            contatacantes--;
+                        }
+
+                    } else if (tablero[i][j].equals("X")) {
+                        if ((tablero[i][j - 1].equals("+")) && (tablero[i][j + 1].equals("X"))) {
+                            tablero[i][j] = " ";
+                        }
+
+                    }
 
                 }
-                ////////////////BORDES//////////////////////
-            }
+                ///// Borde inferior
+                if ((i == 10) && (j > 0 && j < 10)) {
+                    if (tablero[i][j].equals("+")) {
+                        if ((tablero[i][j - 1].equals("X") || tablero[i][j - 1].equals("$")) && (tablero[i][j + 1].equals("X") || tablero[i][j + 1].equals("$"))) {
+                            tablero[i][j] = " ";
+                            contatacantes--;
+                        }
 
+                    } else if (tablero[i][j].equals("X")) {
+                        if ((tablero[i][j - 1].equals("+")) && (tablero[i][j + 1].equals("X"))) {
+                            tablero[i][j] = " ";
+                        }
+
+                    }
+
+                }
+                ////////////Borde Derecho
+                if ((i > 10 && i < 10) && (j == 10)) {
+                    if (tablero[i][j].equals("+")) {
+                        if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
+                            tablero[i][j] = " ";
+                            contatacantes--;
+                        }
+                    } else if (tablero[i][j].equals("X")) {
+                        if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
+                            tablero[i][j] = " ";
+                        }
+                    }
+                }
+                //////////////////COMIDA GENERAL////////////////////////////////
+                ////ARRIBA Y ABAJO
+                if (tablero[i][j].equals("+")) {
+                    if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
+                        tablero[i][j] = " ";
+                        contatacantes--;
+                    }
+                } else if (tablero[i][j].equals("X")) {
+                    if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
+                        tablero[i][j] = " ";
+                    }
+                }
+                ///// DERECHA E IZQUIERDA
+                if (tablero[i][j].equals("+")) {
+                    if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
+                        tablero[i][j] = " ";
+                        contatacantes--;
+                    }
+                } else if (tablero[i][j].equals("X")) {
+                    if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
+                        tablero[i][j] = " ";
+                    }
+                }
+            }
         }
         return tablero;
     }
