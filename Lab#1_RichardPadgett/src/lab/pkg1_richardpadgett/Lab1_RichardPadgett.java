@@ -3,9 +3,9 @@ package lab.pkg1_richardpadgett;
 import java.util.Scanner;
 
 public class Lab1_RichardPadgett {
-    
+
     static Scanner sc = new Scanner(System.in);
-    
+
     public static void main(String[] args) {
         System.out.println("[[[[[[[[[[[[TAWLBWRDD]]]]]]]]]]]]");
         String[][] tablero = new String[11][11];
@@ -13,8 +13,8 @@ public class Lab1_RichardPadgett {
         impat(tablero, 0, 0);
         System.out.println();
         turno(llenar(tablero));
-    } 
-    
+    }
+
     public static void impat(String[][] tablero, int f, int c) {
         if (f == tablero.length - 1 && c == tablero.length - 1) {
             System.out.print(tablero[f][c] + " ");
@@ -27,9 +27,9 @@ public class Lab1_RichardPadgett {
                 impat(tablero, f, c + 1);
             }
         }
-        
+
     }
-    
+
     public static void turno(String[][] tablero) {
         boolean turn = false;
         do {
@@ -57,12 +57,12 @@ public class Lab1_RichardPadgett {
                         System.out.println("Ingrese a que poscicion desea moverse");
                         System.out.println("ingrese su coordenada en X");
                         int y2 = sc.nextInt();
-                        
+
                         if (tablero[x][y2].equals("[+]") || tablero[x][y2].equals("[X]")) {
                             System.out.println("El espacio esta ocupado");
                             System.out.println("ingrese su coordenada en X");
                             y2 = sc.nextInt();
-                            
+
                         }
                         if (y2 > y) {
                             for (int i = y; i <= y2; i++) {
@@ -78,7 +78,7 @@ public class Lab1_RichardPadgett {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en X");
                                     y2 = sc.nextInt();
-                                    
+
                                 }
                             }
                         }
@@ -87,17 +87,17 @@ public class Lab1_RichardPadgett {
                         impat(tablero, 0, 0);
                         manerasdeganarey(tablero);
                         break;
-                    
+
                     case 2:
                         System.out.println("Ingrese a que poscicion desea moverse");
                         System.out.println("ingrese su coordenada en Y");
                         int x1 = sc.nextInt();
-                        
+
                         if (tablero[x1][y].equals("[+]") || tablero[x1][y].equals("[X]")) {
                             System.out.println("El espacio esta ocupado");
                             System.out.println("ingrese su coordenada en Y");
                             x1 = sc.nextInt();
-                            
+
                         }
                         if (x1 > x) {
                             for (int i = x; i <= x1; i++) {
@@ -113,7 +113,7 @@ public class Lab1_RichardPadgett {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     x1 = sc.nextInt();
-                                    
+
                                 }
                             }
                         }
@@ -121,7 +121,7 @@ public class Lab1_RichardPadgett {
                         tablero[x][y] = "[ ] ";
                         impat(tablero, 0, 0);
                         manerasdeganarey(tablero);
-                        
+
                         break;
                 }
             } else {
@@ -148,12 +148,12 @@ public class Lab1_RichardPadgett {
                         System.out.println("Ingrese a que poscicion desea moverse");
                         System.out.println("ingrese su coordenada en Y");
                         int y2 = sc.nextInt();
-                        
+
                         if (tablero[x][y2].equals("[+]") || tablero[x][y2].equals("[X]")) {
                             System.out.println("El espacio esta ocupado");
                             System.out.println("ingrese su coordenada en Y");
                             y2 = sc.nextInt();
-                            
+
                         }
                         if (tablero[x][y].equals("[$]")) {
                             tablero[x][y] = "[ ] ";
@@ -173,7 +173,7 @@ public class Lab1_RichardPadgett {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     y2 = sc.nextInt();
-                                    
+
                                 }
                             }
                         }
@@ -181,18 +181,18 @@ public class Lab1_RichardPadgett {
                         tablero[x][y] = "[ ]";
                         impat(tablero, 0, 0);
                         manerasdeganarey(tablero);
-                        
+
                         break;
                     case 2:
                         System.out.println("Ingrese a que poscicion desea moverse");
                         System.out.println("ingrese su coordenada en Y");
                         int x1 = sc.nextInt();
-                        
+
                         if (tablero[x1][y].equals("[+]") || tablero[x1][y].equals("[X]")) {
                             System.out.println("El espacio esta ocupado");
                             System.out.println("ingrese su coordenada en Y");
                             x1 = sc.nextInt();
-                            
+
                         }
                         if (tablero[x][y].equals("[$]")) {
                             tablero[x][y] = "[ ]";
@@ -212,7 +212,7 @@ public class Lab1_RichardPadgett {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en X");
                                     x1 = sc.nextInt();
-                                    
+
                                 }
                             }
                         }
@@ -220,16 +220,16 @@ public class Lab1_RichardPadgett {
                         tablero[x][y] = "[ ]";
                         impat(tablero, 0, 0);
                         manerasdeganarey(tablero);
-                        
+
                         break;
                 }
-                
+
             }
             turn = true;
         } while (turn);
-        
+
     }
-    
+
     public static String[][] llenar(String[][] tablero) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
@@ -315,13 +315,13 @@ public class Lab1_RichardPadgett {
                 } else {
                     tablero[i][j] = "[ ]";
                 }
-                
+
             }
         }
-        
+
         return tablero;
     }
-    
+
     public static String[][] manerasdeganarey(String[][] tablero) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
@@ -350,12 +350,12 @@ public class Lab1_RichardPadgett {
         }
         return tablero;
     }
-    
+
     public static String[][] Comer(String[][] tablero) {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 ///Esquinas/////////
-                if ((i == 0 && j == 0)||(i==10&&j==0)||(i==0&&j==10)||(i==10)) {
+                if ((i == 0 && j == 0) || (i == 10 && j == 0) || (i == 0 && j == 10) || (i == 10&& j ==10)) {
                     if (tablero[i][j].equals("+")) {
                         ///Izquierda superior
                         if ((tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$")) && (tablero[i + 1][j + 1].equals("X") || tablero[i + 1][j + 1].equals("$")) && (tablero[i][j + 1].equals("X") || tablero[i][j + 1].equals("$"))) {
@@ -374,7 +374,7 @@ public class Lab1_RichardPadgett {
                             tablero[i][j] = " ";
                         }
                     } else if (tablero[i][j].equals("X") || tablero[i][j].equals("$")) {
-                         ///Izquierda superior
+                        ///Izquierda superior
                         if ((tablero[i + 1][j].equals("+")) && (tablero[i + 1][j + 1].equals("+")) && (tablero[i][j + 1].equals("+"))) {
                             tablero[i][j] = " ";
                         }
@@ -391,13 +391,13 @@ public class Lab1_RichardPadgett {
                             tablero[i][j] = " ";
                         }
                     }
-                    
+
                 }
                 ////////////////BORDES//////////////////////
             }
-            
+
         }
         return tablero;
     }
-    
+
 }
