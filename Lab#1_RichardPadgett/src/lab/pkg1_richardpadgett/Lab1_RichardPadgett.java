@@ -432,13 +432,13 @@ public class Lab1_RichardPadgett {
                             contatacantes--;
                         }
                     } else if (tablero[i][j].equals("[X]")) {
-                        if ((tablero[i - 1][j].equals("[+]")) && (tablero[i + 1][j].equals("[X]"))) {
+                        if ((tablero[i - 1][j].equals("[+]")) && (tablero[i + 1][j].equals("[+]"))) {
                             tablero[i][j] = "[ ]";
                         }
                     }
                     ///// DERECHA E IZQUIERDA
                     if (tablero[i][j].equals("[+]")) {
-                        if ((tablero[i][j - 1].equals("[X]") || tablero[i][j - 1].equals("[ ]")) &&/* 2  */ (tablero[i][j + 1].equals("[X]") || tablero[i][j + 1].equals("[$]"))) {
+                        if ((tablero[i][j - 1].equals("[X]") || tablero[i][j - 1].equals("[$]")) &&/* 2  */ (tablero[i][j + 1].equals("[X]") || tablero[i][j + 1].equals("[$]"))) {
                             tablero[i][j] = "[ ]";
                             contatacantes--;
                         }
