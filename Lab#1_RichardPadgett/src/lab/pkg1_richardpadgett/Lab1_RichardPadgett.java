@@ -38,6 +38,7 @@ public class Lab1_RichardPadgett {
         int contturno = 0;
         do {
             if (contturno % 2 == 0) {
+                Comer(tablero);
                 System.out.println();
                 System.out.println("[[[[ENEMY PHASE]]]]]");
                 System.out.println("ingrese la pieza que desea mover");
@@ -47,6 +48,13 @@ public class Lab1_RichardPadgett {
                 int y = sc.nextInt();
                 if (tablero[y][x].equals("[X]") || tablero[y][x].equals("[$]") || tablero[y][x].equals("[ ]")) {
                     System.out.println("Unidad incorrecta");
+                    System.out.println("ingrese su coordenada en X");
+                    x = sc.nextInt();
+                    System.out.println("ingrese su coordenada en Y");
+                    y = sc.nextInt();
+                }
+                if (x > tablero.length || y > tablero.length) {
+                    System.out.println("no se pudo conseguir coordenada");
                     System.out.println("ingrese su coordenada en X");
                     x = sc.nextInt();
                     System.out.println("ingrese su coordenada en Y");
@@ -110,7 +118,7 @@ public class Lab1_RichardPadgett {
                         }
                         if (y2 >= y) {
                             for (int i = y + 1; i <= y2; i++) {
-                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("+") || tablero[y2][i].equals("[$]")) {
+                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("[+]") || tablero[y2][i].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     y2 = sc.nextInt();
@@ -118,7 +126,7 @@ public class Lab1_RichardPadgett {
                             }
                         } else {
                             for (int i = y - 1; i >= y2; i--) {
-                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("+") || tablero[y2][i].equals("[$]")) {
+                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("[+]") || tablero[y2][i].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     y2 = sc.nextInt();
@@ -134,14 +142,22 @@ public class Lab1_RichardPadgett {
                         break;
                 }
 
-               
             } else {
+                Comer(tablero);
+                System.out.println();
                 System.out.println("[[[[DEFENDER PHASE]]]]]");
                 System.out.println("ingrese la pieza que desea mover");
                 System.out.println("ingrese su coordenada en X");
                 int x = sc.nextInt();
                 System.out.println("ingrese su coordenada en Y");
                 int y = sc.nextInt();
+                if (x > tablero.length || y > tablero.length) {
+                    System.out.println("no se pudo conseguir coordenada");
+                    System.out.println("ingrese su coordenada en X");
+                    x = sc.nextInt();
+                    System.out.println("ingrese su coordenada en Y");
+                    y = sc.nextInt();
+                }
                 if (tablero[y][x].equals("[+]") || tablero[y][x].equals("[ ]")) {
                     System.out.println("Unidad incorrecta");
                     System.out.println("ingrese su coordenada en X");
@@ -207,7 +223,7 @@ public class Lab1_RichardPadgett {
                         }
                         if (y2 >= y) {
                             for (int i = y + 1; i <= y2; i++) {
-                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("+") || tablero[y2][i].equals("[$]")) {
+                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("[+]") || tablero[y2][i].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     y2 = sc.nextInt();
@@ -215,7 +231,7 @@ public class Lab1_RichardPadgett {
                             }
                         } else {
                             for (int i = y - 1; i >= y2; i--) {
-                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("+") || tablero[y2][i].equals("[$]")) {
+                                if (tablero[y2][i].equals("[X]") || tablero[y2][i].equals("[+]") || tablero[y2][i].equals("[$]")) {
                                     System.out.println("no puede saltar fichas");
                                     System.out.println("ingrese su coordenada en Y");
                                     y2 = sc.nextInt();
@@ -350,28 +366,28 @@ public class Lab1_RichardPadgett {
                 ////////////////BORDES//////////////////////
                 // borde izquierdo
                 if (i > 0 && i < 10) {
-                    if (tablero[i][j].equals("+")) {
-                        if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
-                            tablero[i][j] = " ";
+                    if (tablero[i][j].equals("[+]")) {
+                        if ((tablero[i - 1][j].equals("[X]") || tablero[i - 1][j].equals("[$]")) &&/* 2  */ (tablero[i + 1][j].equals("[X]") || tablero[i + 1][j].equals("[$]"))) {
+                            tablero[i][j] = "[ ]";
                             contatacantes--;
                         }
-                    } else if (tablero[i][j].equals("X")) {
-                        if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
-                            tablero[i][j] = " ";
+                    } else if (tablero[i][j].equals("[X]")) {
+                        if ((tablero[i - 1][j].equals("[+]")) && (tablero[i + 1][j].equals("[+]"))) {
+                            tablero[i][j] = "[ ]";
                         }
                     }
                 }
                 ////borde superior
                 if (j > 0 && j < 10) {
-                    if (tablero[i][j].equals("+")) {
-                        if ((tablero[i][j - 1].equals("X") || tablero[i][j - 1].equals("$")) && (tablero[i][j + 1].equals("X") || tablero[i][j + 1].equals("$"))) {
-                            tablero[i][j] = " ";
+                    if (tablero[i][j].equals("[+]")) {
+                        if ((tablero[i][j - 1].equals("[X]") || tablero[i][j - 1].equals("[$]")) && (tablero[i][j + 1].equals("[X]") || tablero[i][j + 1].equals("[$]"))) {
+                            tablero[i][j] = "[ ]";
                             contatacantes--;
                         }
 
-                    } else if (tablero[i][j].equals("X")) {
-                        if ((tablero[i][j - 1].equals("+")) && (tablero[i][j + 1].equals("X"))) {
-                            tablero[i][j] = " ";
+                    } else if (tablero[i][j].equals("[X]")) {
+                        if ((tablero[i][j - 1].equals("[+]")) && (tablero[i][j + 1].equals("[+]"))) {
+                            tablero[i][j] = "[ ]";
                         }
 
                     }
@@ -379,54 +395,57 @@ public class Lab1_RichardPadgett {
                 }
                 ///// Borde inferior
                 if ((i == 10) && (j > 0 && j < 10)) {
-                    if (tablero[i][j].equals("+")) {
-                        if ((tablero[i][j - 1].equals("X") || tablero[i][j - 1].equals("$")) && (tablero[i][j + 1].equals("X") || tablero[i][j + 1].equals("$"))) {
-                            tablero[i][j] = " ";
+                    if (tablero[i][j].equals("[+]")) {
+                        if ((tablero[i][j - 1].equals("[X]") || tablero[i][j - 1].equals("[$]")) && (tablero[i][j + 1].equals("[X]") || tablero[i][j + 1].equals("[$]"))) {
+                            tablero[i][j] = "[ ]";
                             contatacantes--;
                         }
 
-                    } else if (tablero[i][j].equals("X")) {
-                        if ((tablero[i][j - 1].equals("+")) && (tablero[i][j + 1].equals("X"))) {
-                            tablero[i][j] = " ";
+                    } else if (tablero[i][j].equals("[X]")) {
+                        if ((tablero[i][j - 1].equals("[+]")) && (tablero[i][j + 1].equals("[+]"))) {
+                            tablero[i][j] = "[ ]";
                         }
 
                     }
 
                 }
                 ////////////Borde Derecho
-                if ((i > 10 && i < 10) && (j == 10)) {
-                    if (tablero[i][j].equals("+")) {
-                        if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
-                            tablero[i][j] = " ";
+                if ((i > 0 && i < 10) && (j == 10)) {
+                    if (tablero[i][j].equals("[+]")) {
+                        if ((tablero[i - 1][j].equals("[X]") || tablero[i - 1][j].equals("[$]")) &&/* 2  */ (tablero[i + 1][j].equals("[X]") || tablero[i + 1][j].equals("[$]"))) {
+                            tablero[i][j] = "[ ]";
                             contatacantes--;
                         }
-                    } else if (tablero[i][j].equals("X")) {
-                        if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
-                            tablero[i][j] = " ";
+                    } else if (tablero[i][j].equals("[X]")) {
+                        if ((tablero[i - 1][j].equals("[+]")) && (tablero[i + 1][j].equals("[+]"))) {
+                            tablero[i][j] = "[ ]";
                         }
                     }
                 }
                 //////////////////COMIDA GENERAL////////////////////////////////
                 ////ARRIBA Y ABAJO
-                if (tablero[i][j].equals("+")) {
-                    if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
-                        tablero[i][j] = " ";
-                        contatacantes--;
+                if ((i > 0 && i < 10) && (j > 0 && j < 10)) {
+
+                    if (tablero[i][j].equals("[+]")) {
+                        if ((tablero[i - 1][j].equals("[X]") || tablero[i - 1][j].equals("[$]")) &&/* 2  */ (tablero[i + 1][j].equals("[X]") || tablero[i + 1][j].equals("[$]"))) {
+                            tablero[i][j] = "[ ]";
+                            contatacantes--;
+                        }
+                    } else if (tablero[i][j].equals("[X]")) {
+                        if ((tablero[i - 1][j].equals("[+]")) && (tablero[i + 1][j].equals("[X]"))) {
+                            tablero[i][j] = "[ ]";
+                        }
                     }
-                } else if (tablero[i][j].equals("X")) {
-                    if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
-                        tablero[i][j] = " ";
-                    }
-                }
-                ///// DERECHA E IZQUIERDA
-                if (tablero[i][j].equals("+")) {
-                    if ((tablero[i - 1][j].equals("X") || tablero[i - 1][j].equals("$")) &&/* 2  */ (tablero[i + 1][j].equals("X") || tablero[i + 1][j].equals("$"))) {
-                        tablero[i][j] = " ";
-                        contatacantes--;
-                    }
-                } else if (tablero[i][j].equals("X")) {
-                    if ((tablero[i - 1][j].equals("+")) && (tablero[i + 1][j].equals("X"))) {
-                        tablero[i][j] = " ";
+                    ///// DERECHA E IZQUIERDA
+                    if (tablero[i][j].equals("[+]")) {
+                        if ((tablero[i][j - 1].equals("[X]") || tablero[i][j - 1].equals("[ ]")) &&/* 2  */ (tablero[i][j + 1].equals("[X]") || tablero[i][j + 1].equals("[$]"))) {
+                            tablero[i][j] = "[ ]";
+                            contatacantes--;
+                        }
+                    } else if (tablero[i][j].equals("[X]")) {
+                        if ((tablero[i][j - 1].equals("[+]")) && (tablero[i][j + 1].equals("[+]"))) {
+                            tablero[i][j] = "[ ]";
+                        }
                     }
                 }
             }
